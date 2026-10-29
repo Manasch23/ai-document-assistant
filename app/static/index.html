@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ask your documents. Get answers with sources, powered by free local AI.">
+  <title>Folio — AI Document Assistant</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Folio home"><span class="mark">f.</span> folio<span class="brand-note">DOCUMENT AI</span></a>
+    <div class="library-heading"><h2>Your library</h2><span id="document-count">0</span></div>
+    <label class="dropzone" id="dropzone" for="file-input">
+      <span class="upload-icon" aria-hidden="true">↑</span><strong>Add a document</strong>
+      <span>Choose a file or drop it here</span><small>PDF, DOCX, TXT, MD · up to 20 MB</small>
+      <input id="file-input" type="file" accept=".pdf,.docx,.txt,.md" aria-label="Upload document">
+    </label>
+    <p id="upload-status" class="status" role="status" aria-live="polite"></p>
+    <p class="library-help">Select documents to narrow your search.<br>No selection searches your whole library.</p>
+    <div id="documents" class="documents"></div>
+    <div class="sidebar-footer"><span class="dot"></span> Local retrieval · private answers<a href="/docs" target="_blank" rel="noreferrer">API documentation ↗</a></div>
+  </aside>
+  <main>
+    <header><span class="breadcrumb">WORKSPACE <span>/</span> Document assistant</span><span class="model-pill" id="model-status">Connecting…</span></header>
+    <div class="content">
+      <section class="intro"><p class="eyebrow">YOUR DOCUMENTS, CONNECTED.</p><h1>Less searching.<br><span>More understanding.</span></h1><p class="description">Turn the pages you have into the answers you need.<br>Ask a question. Follow the evidence.</p></section>
+      <div id="config-banner" class="banner" hidden>Start Ollama and download the selected model, then restart the server. You can upload documents now.</div>
+      <section class="conversation" id="conversation" aria-live="polite" aria-label="Questions and answers">
+        <div class="welcome" id="welcome"><span class="welcome-icon" aria-hidden="true">✳</span><h2>A good question starts here.</h2><p>Upload a document on the left, then ask about what’s inside.</p><div class="suggestions"><button type="button" data-question="Summarize the main points in these documents.">Summarize the main points ↗</button><button type="button" data-question="What dates and deadlines are mentioned?">Find dates and deadlines ↗</button></div></div>
+      </section>
+      <form id="question-form" class="composer"><label for="question">ASK YOUR LIBRARY</label><div class="input-row"><textarea id="question" rows="2" maxlength="2000" placeholder="What would you like to know?" required></textarea><button id="ask-button" type="submit" aria-label="Send question">↑</button></div><div class="composer-footer"><span id="scope-label">Searching your whole library</span><span>Ctrl + Enter to send</span></div></form>
+      <p id="ask-status" class="status" role="status"></p>
+      <p class="footnote">Answers may contain mistakes. Check the source excerpts. By default, documents stay on this computer.</p>
+    </div>
+  </main>
+  <template id="document-template"><div class="document"><label><input type="checkbox"><span class="file-icon">↳</span><span class="file-info"><strong></strong><small></small></span></label><button class="delete" type="button" aria-label="Delete document">×</button></div></template>
+</body>
+</html>
